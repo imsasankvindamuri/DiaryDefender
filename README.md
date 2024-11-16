@@ -4,7 +4,7 @@ While it will be initially simplistic, I intend to make it a sophisticated resum
 
 # The Concept #
 
-I have a diary.txt file which I don't want people to read. The idea is `to request a password for access`.
+I have a `diary.txt` file which I don't want people to read. The idea is `to request a password for access`.
 Over time I could add other features like scrambling, encryption, and other security measures. I'll update the README.md file every time I make a major update.
 
 ### Stretch Goals To Achieve: ###
@@ -14,4 +14,5 @@ Over time I could add other features like scrambling, encryption, and other secu
 - Try to find a way to deny access to the .txt file if the password is wrong.
 
 Note: The above list is subject to change.
+
 Edit 1: Corrected Grammar.
