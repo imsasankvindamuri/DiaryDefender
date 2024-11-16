@@ -7,7 +7,7 @@ While it will be initially simplistic, I intend to make it a sophisticated resum
 I have a `diary.txt` file which I don't want people to read. The idea is `to request a password for access`.
 Over time I could add other features like scrambling, encryption, and other security measures. I'll update the README.md file every time I make a major update.
 
-### Stretch Goals To Achieve: ###
+### Goals To Achieve: ###
 
 - Write a program to execute when `diary.txt` has been opened.
 - Modify to ask for a password.
@@ -15,4 +15,4 @@ Over time I could add other features like scrambling, encryption, and other secu
 
 Note: The above list is subject to change.
 
-Edit 1: Corrected Grammar.
+Edit 1: Corrected Grammar and clarified intent.
