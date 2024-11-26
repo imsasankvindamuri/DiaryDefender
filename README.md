@@ -4,15 +4,13 @@ While it will be initially simplistic, I intend to make it a sophisticated resum
 
 # The Concept #
 
-I have a `diary.txt` file which I don't want people to read. The idea is `to request a password for access`.
+I have a `diary` file which I don't want people to read. The idea is `to request a password for access`.
 Over time I could add other features like scrambling, encryption, and other security measures. I'll update the README.md file every time I make a major update.
 
 ### Goals To Achieve: ###
 
-- Write a program to execute when `diary.txt` has been opened.
-- Modify to ask for a password.
-- Try to find a way to deny access to the .txt file if the password is wrong.
-
-Note: The above list is subject to change.
-
-Edit 1: Corrected Grammar and clarified intent.
+- Create a simple text-editor.
+- Add a password feature.
+- Encrypt the files so that the information stays secure.
+  
+I'll update once I get some progress in this. Thanks for viewing!
