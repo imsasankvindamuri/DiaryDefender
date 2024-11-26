@@ -3,8 +3,6 @@ from datetime import datetime
 import pytz
 from prompt_toolkit import prompt
 
-entries_dir = "C:\DiaryDefender\diaryentries"
-
 def addEntry():
     """This checks for if a given entry exists. If it does, it opens that entry. Else, It makes a new one."""
     pass
