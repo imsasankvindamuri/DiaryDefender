@@ -2,32 +2,7 @@ import os
 from datetime import datetime
 import pytz
 from prompt_toolkit import prompt
-
-def addEntry():
-    """This checks for if a given entry exists. If it does, it opens that entry. Else, It makes a new one."""
-    pass
-
-def delEntry():
-    """This deletes an entry if it exists"""
-    pass
-
-def editEntry():
-    """This edits an existing entry"""
-    pass
-
-def dispEntries():
-    """This displays the index of all entries, and displays specific user-chosen entry in read-only mode"""
-    pass
-
-def exitDiary():
-    """Exits the app"""
-    confirm = input("Are you sure [y/n]? ").lower()
-
-    if confirm == 'y':
-        print("Thanks for using the app!")
-        exit()
-    else:
-        print("Returning to Diary...")
+from diary_funcs import *
 
 if __name__ == '__main__':
     os.system('cls' if os.name == 'nt' else 'clear')
@@ -45,11 +20,11 @@ Please choose one of the below options:
 5. Exit the diary
 ''')
             actions = {
-                '1': dispEntries,
-                '2': addEntry,
-                '3': delEntry,
-                '4': editEntry,
-                '5': exitDiary,
+                '1': view_entry,
+                '2': add_entry,
+                '3': del_entry,
+                '4': edit_entry,
+                '5': exit_app,
             }
             
             action = actions.get(selector)
