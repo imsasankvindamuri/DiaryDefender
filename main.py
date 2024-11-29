@@ -1,8 +1,10 @@
-import os
 from datetime import datetime
 import pytz
 from prompt_toolkit import prompt
 from diary_funcs import *
+import sys
+import os
+
 
 if __name__ == '__main__':
     os.system('cls' if os.name == 'nt' else 'clear')
@@ -35,4 +37,4 @@ Please choose one of the below options:
 
         except KeyboardInterrupt:
             print("\nProcess Interrupted. Exiting Program...")
-            exit()
+            sys.exit()
