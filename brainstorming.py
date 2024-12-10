@@ -24,40 +24,47 @@
 # print(s)
 import os
 import sys
-from msvcrt import kbhit,getch
+from msvcrt import getch
 
-entry_array = [['']]
+entry_array = ['']
+
+undo_array = []
 
 cursor_x,cursor_y = 0,0
 
 running = True
 
-# key_bindings = {
-#     b'\x08':'whatever bksp does',
-#     b'enter':'goto newline (add new array to entry_array and set cursor to it)',
-#     b'space':'end current word and go to the next',
-#     b'ctrl+s':'save doc',
-#     b'ctrl+z':'revert entry back to clean slate',
-# }
+def display(array) -> None:
+    os.system('cls' if os.name == 'nt' else 'clear')
+    print("".join(array))
+
+def savedoc(array) -> None:
+    confirm = input("Are you sure [y/n]? ").lower()
+    if confirm == 'y':
+        with open("hello.txt","a+") as file:
+            file.write("".join(array))
+        sys.exit()
+    else:
+        print("Returning to Diary...")
+
+key_bindings = {
+    b'\x08':lambda array,undo_array = undo_array: undo_array.append(array.pop()) if array else None,
+    b'\x0d':lambda array: array.append("\n"),
+    b'\x1b':savedoc,
+    b'\x1a':lambda array, undo_array = undo_array: array.append(undo_array.pop()) if undo_array else None,
+}
 
 while running:
+    display(entry_array)
     key = getch()
 
     try:
-        if key == b'\x1b':
-            running = False
-        elif key == b'\x0d':
-            entry_array.append([''])
-            cursor_y += 1
-            cursor_x = 0
+        if key in key_bindings:
+            key_bindings[key](entry_array)
         else:
             alpha_numeric = key.decode('ascii')
-            if alpha_numeric == ' ':
-                cursor_x += 1
-                entry_array[cursor_y].append('')
-            else:
-                entry_array[cursor_y][cursor_x] = entry_array[cursor_y][cursor_x] + alpha_numeric
+            entry_array.append(alpha_numeric)
     except UnicodeDecodeError:
         running = False
 
-print('\n'.join([' '.join(i) for i in entry_array]))
+display(entry_array)
