@@ -23,7 +23,6 @@
 # s = sys.stdin.read()
 # print(s)
 import os
-import sys
 from msvcrt import getch
 
 entry_array = ['']
@@ -39,19 +38,19 @@ def display(array) -> None:
     print("".join(array))
 
 def savedoc(array) -> None:
+    global running
     confirm = input("Are you sure [y/n]? ").lower()
     if confirm == 'y':
         with open("hello.txt","a+") as file:
             file.write("".join(array))
-        sys.exit()
+        running = False
     else:
         print("Returning to Diary...")
 
 key_bindings = {
-    b'\x08':lambda array,undo_array = undo_array: undo_array.append(array.pop()) if array else None,
+    b'\x08':lambda array: array.pop() if array else None,
     b'\x0d':lambda array: array.append("\n"),
     b'\x1b':savedoc,
-    b'\x1a':lambda array, undo_array = undo_array: array.append(undo_array.pop()) if undo_array else None,
 }
 
 while running:
