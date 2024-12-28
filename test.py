@@ -1,57 +1,62 @@
-import os
-from msvcrt import getch
+# from curses import wrapper
+# import curses
 
-entry_array = ['']
-cursor_row, cursor_col = 0, 0
-running = True
+# def main(stdscr):
+#     # Clear screen
+#     disp_list = [f"10 divided by {i} is {10/i}\n" for i in range(1,11)]
+#     stdscr.clear()
+#     stdscr.scrollok(True)
 
-def display(array) -> None:
-    os.system('cls' if os.name == 'nt' else 'clear')
-    print("\n".join(array))
+#     for i in range(10):
+#         stdscr.addstr(disp_list[i])
+#         stdscr.refresh()
+#         curses.napms(1000)
+    
+#     stdscr.getkey()
 
-def bksp(array) -> None:
-    global cursor_row
-    if array[cursor_row] == '':
-        if cursor_row > 0:
-            array.pop()
-            cursor_row -= 1
+# wrapper(main)
+
+import curses
+from curses import wrapper
+
+buffer = [[]]
+final_text = ''
+
+def bksp() -> None:
+    #delete last element
+    pass
+
+def newline() -> None:
+    #goto new line
+    pass
+
+def context_window(array) -> None:
+    #makes sure that the diary doesn't exceed given terminal size
+    pass
+
+
+def main(stdscr):
+    global buffer
+    global final_text
+
+    spcl_chars = {
+        curses.KEY_BACKSPACE : bksp,
+        curses.KEY_ENTER : newline,
+    }
+
+    stdscr.clear()
+    
+    while True:
+        c = stdscr.getch()
+        
+        if c in spcl_chars:
+            spcl_chars[c](context_window(buffer))
+
         else:
-            None
-    else:
-        array[cursor_row] = array[cursor_row][:-1]
+            #add element to the buffer
+            pass
 
-def nwline(array) -> None:
-    global cursor_row
-    array.append('')
-    cursor_row += 1
+        stdscr.clear()
+        stdscr.addstr(context_window(buffer))
 
-def savedoc(array) -> None:
-    global running
-    confirm = input("Are you sure [y/n]? ").lower()
-    if confirm == 'y':
-        with open("hello.txt","a+") as file:
-            file.write("\n".join(array))
-        running = False
-    else:
-        print("Returning to Diary...")
-
-key_bindings = {
-    b'\x08':bksp,
-    b'\x0d':nwline,
-    b'\x13':savedoc,
-}
-
-while running:
-    display(entry_array)
-    key = getch()
-
-    try:
-        if key in key_bindings:
-            key_bindings[key](entry_array)
-        else:
-            alpha_numeric = key.decode('ascii')
-            entry_array[cursor_row] = entry_array[cursor_row] + alpha_numeric
-    except UnicodeDecodeError:
-        running = False
-
-display(entry_array)
+wrapper(main)
