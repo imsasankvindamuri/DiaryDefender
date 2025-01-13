@@ -1,4 +1,7 @@
-from DiaryEntry import DiaryEntry
+from DiaryIO import DiaryIO
+from DiaryDB import DiaryDB
 
-NewEntry = DiaryEntry()
-NewEntry.prompt_entry()
+newDiaryIO = DiaryIO()
+newDiaryDB = DiaryDB()
+
+newDiaryDB.diary_display_one()

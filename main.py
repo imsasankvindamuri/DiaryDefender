@@ -1,5 +1,5 @@
 from datetime import datetime
-import pytz
+# import pytz
 from prompt_toolkit import prompt
 from diary_funcs import *
 import sys

@@ -1,27 +1,29 @@
-from prompt_toolkit import prompt, HTML
+from prompt_toolkit import prompt, print_formatted_text as print, HTML
 from prompt_toolkit.styles import Style
 from prompt_toolkit.shortcuts import yes_no_dialog
 from datetime import datetime
+import os
 
-
-class DiaryEntry():
-    now = datetime.now()
-
-    def __init__(self, date_of_entry = now.strftime("%d-%m-%Y"), contents_of_entry = ""):
-        self.date_of_entry = date_of_entry
+class DiaryIO():
+    
+    def __init__(self, date_of_entry : str = None, contents_of_entry : str = ""):
+        now = datetime.now()
+        self.date_of_entry = date_of_entry or now.strftime("%d-%m-%Y")
         self.contents_of_entry = contents_of_entry
 
     def prompt_entry(self) -> None:
         """Prompts user for entry. Useful for both editing and creating a new entry."""
+        
         style = Style.from_dict({
-            'comp' : '#ff0066',
+            'diaryprompt' : '#ff0066',
             'date' : '#44ff00 italic',
             'shortcut' : '#0563fa bold italic'
         })
 
         while True:
+            os.system('cls' if os.name == 'nt' else 'clear')
             self.contents_of_entry = prompt(
-                HTML(f"<comp>Entry Date:--</comp> <date>{self.date_of_entry}</date>\n",),
+                HTML(f"<diaryprompt>Entry Date:--</diaryprompt> <date>{self.date_of_entry}</date>\n",),
                 style=style,
                 default=self.contents_of_entry,
                 multiline=True,
@@ -34,15 +36,20 @@ class DiaryEntry():
             ).run()
             
             if result:
-                """Save to DB using `SQLite3` library. Will place code in once I'm done with that.
-                For now, here's a print statement as a proof of concept."""
-                print(f"This is the entry for the date {self.date_of_entry}:\n{self.contents_of_entry}")
-                break
-            
-            return None
+                
+                os.system('cls' if os.name == 'nt' else 'clear')
+                print(
+                    HTML(f"<diaryprompt>This is the entry for the date</diaryprompt> <date>{self.date_of_entry}:</date>\n{self.contents_of_entry}"),
+                    style=style
+                )
+                return None
             
 
     def display_entry(self) -> None:
         """Displays current entry in read-only mode."""
+        os.system('cls' if os.name == 'nt' else 'clear')
         print(self.contents_of_entry)
         return None
+    
+if __name__ == "__main__":
+    pass
