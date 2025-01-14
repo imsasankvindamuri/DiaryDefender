@@ -52,10 +52,10 @@ if __name__ == '__main__':
     newDiaryDB.initialize_DB()
 
     button_action_map = [
-        ("Add New Entry", "Add New Entry"),
-        ("Edit Existing Entry", "Edit Existing Entry"),
-        ("Delete Existing Entry", "Delete Existing Entry"),
-        ("View an Entry", "View an Entry"),
+        ("Add", "Add New Entry"),
+        ("Edit", "Edit Existing Entry"),
+        ("Delete", "Delete Existing Entry"),
+        ("View", "View an Entry"),
         ("Quit", False),
     ]
 
