@@ -46,10 +46,9 @@ class DiaryIO():
             
 
     def display_entry(self) -> None:
-        """Displays current entry in read-only mode."""
-        os.system('cls' if os.name == 'nt' else 'clear')
-        print(self.contents_of_entry)
-        return None
+        pass
+
+
     
 if __name__ == "__main__":
     pass

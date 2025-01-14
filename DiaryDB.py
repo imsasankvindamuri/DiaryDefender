@@ -88,11 +88,20 @@ class DiaryDB():
             connection.commit()
             return None
         
-    def diary_display_one(self) -> None:
+    def diary_choose_one(self) -> str:
         with sql.connect("DiaryEntries.db") as connection:
             cursor = connection.cursor()
-            lst = paginate([entry for entry in cursor.execute("select date, content from entries")])
+            lst = paginate([entry for entry in cursor.execute("select date, date from entries")])
             pageno = 0
+            if not lst:
+                result = button_dialog(
+                    title="Oops!",
+                    text="No Entries currently. Please press Enter to continue...",
+                    buttons=[("OK", None)],
+                ).run()
+
+                return None
+            
             while True:
                 
                 page = preppage(pageno,lst)
@@ -102,19 +111,17 @@ class DiaryDB():
                     text="Please Choose One of the below Options...",
                     buttons=page,
                 ).run()
+                
                 if result:
                     if result == b'M':
                         pageno += 1 if pageno < len(lst) else None
                     elif result == b'K':
                         pageno -= 1 if pageno > 0 else None
                     else:
-                        print(result)
-                        getch()
-                        return None
+                        return result
                 
                 else:
                     return None
-
 
 if __name__ == "__main__":
     pass
